@@ -1,0 +1,549 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PEACE INTEL · EXPLORATIONS
+   Not adopted. Kept out of components.css on purpose.
+
+   AGENTS.md tells Nathanael's agent to build pages from the catalog in
+   components.css. Nothing in this file is in that catalog yet, so nothing here
+   should appear in production until Matt picks from it. When something is
+   chosen it moves into components.css with its rationale and this file shrinks.
+
+   What is left here (Rev 39, 2026-10-16; AGENTS.md has the status table):
+     THE ASK             .ask, textarea.pt: Home only, ships with home.html;
+                         new forms are on Pl. 17
+     DOCUMENTARY IMAGES  .doc-fig, .doc-shot, .doc-dark, [data-docglitch]:
+                         decided (Pl. 18 · A1), on Home's corpus band since
+                         Rev 38; ships with home.html
+     DOCUMENTS           the report and the deck (report.html, slides.html)
+                         with the forest plot (.viz, .forest): Exploration,
+                         in the handoff and labelled so
+   Everything else moved to components.css on 16 October: the veil and the
+   still, the console's projects, context, memory, artifacts, dialogs and
+   finder, the margin, the floating bar, the phone console, the library
+   sheet and what a paper opens to. The numbered steps took the ledger's
+   rule in components.css (Pl. 16 · S2).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ============================================================================
+   HELD FROM HOME. Built 2026-10-08, held 2026-10-09
+   ----------------------------------------------------------------------------
+   home.html needed these and uses them, and they are not adopted. They live
+   here for the same reason everything else in this file does: a shape in
+   components.css reaches production by default. Shown in Pl. 19 of
+   brand-guide.html. Two decisions are open, and each is all-or-nothing:
+
+   THE ICONS were adopted on 2026-10-15 and moved to components.css.
+
+   THE ASK. .ask, the editable prompt and .blank-wrap are closer to product
+   behaviour than to brand. They come with two drivers in system.js, SWITCH and
+   PROMPTS, which are marked as held there.
+
+   Moved from components.css unchanged; nothing below was edited.
+   ============================================================================ */
+
+/* ASK. The prompt as a section's subject, with the suggestion pills that fill
+   it. Pills first, because they are the offer and the prompt is where the
+   offer lands. */
+.ask { max-width: var(--col-text); margin: 0 auto }
+.ask .pills { justify-content: center }
+/* In a tray (2026-10-14) the row fills the column, so the recess is one band
+   under the prompt rather than a box the width of whichever pills fit. */
+.ask .pills.tray { display: flex }
+.ask .pills + .prompt { margin-top: var(--sp-8) }
+/* Pl. 17: the ask, four forms (16 October). A is the rules above.
+   B, the console's composer with the workflows as rows under it. */
+.ask--b .composer { max-width: none }
+.ask-rows { display: grid; margin-top: var(--sp-5) }
+.ask-row { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) var(--sp-2); border-top: 1px solid var(--line); font-size: var(--t-ui); color: var(--ink-70); text-align: left; transition: background var(--mo-base), color var(--mo-base) }
+.ask-row:first-child { border-top-color: var(--line-2) }
+.ask-row span { flex: 1 }
+.ask-row .glyph { width: var(--sp-4); height: var(--sp-4); color: var(--ink-55); transition: transform var(--mo-base) }
+.ask-row:hover, .ask-row[aria-pressed="true"] { background: var(--wash-1); color: var(--ink) }
+.ask-row:hover .glyph { transform: translateX(2px) }
+/* C, a sentence with a blank that writes the question. */
+.ask-sent { margin-bottom: var(--sp-5); font-family: var(--serif); font-size: var(--t-h3); line-height: var(--t-h3-lh); color: var(--ink) }
+/* D, the workflows as small chips along the prompt's foot. */
+.ask-chips { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1) var(--sp-2); min-width: 0; flex: 1 }
+.ask-chips .eyebrow { margin-right: var(--sp-1) }
+.ask--d .composer-bar { align-items: flex-end; flex-wrap: nowrap }
+.ask--d .ask-chips { height: auto }
+/* On a phone five pills centred in a wrap came out 1 / 2 / 1 / 1. As one
+   column they read as the list of workflows they are. That holds for the
+   tray; loose chips (Home, Rev 57) wrap as chips. */
+@media (max-width: 620px) {
+  .ask .pills.tray { display: grid; grid-template-columns: minmax(0, 1fr) }
+  .ask .pills.tray .pill { justify-content: center }
+}
+.prompt .composer-bar { margin-top: var(--sp-5) }
+.prompt:focus-within { border-color: var(--ink-35) }
+
+/* A PROMPT THAT TAKES INPUT. .pt was drawn as a picture of a question, muted
+   with its key terms in bold ink. When it is the real field the words are the
+   reader's own and take full ink. The field draws no box of its own: the
+   prompt is the box, and its focus state is the prompt's. Three lines tall at
+   rest, growing with the text where field-sizing is supported. */
+.prompt textarea.pt {
+  display: block; width: 100%; padding: 0;
+  border: 0; border-radius: 0; background: none; box-shadow: none;
+  resize: none; outline: none;
+  font-size: var(--t-prompt); line-height: 1.4; color: var(--ink);
+  field-sizing: content; min-height: calc(var(--t-prompt) * 1.4 * 3);
+}
+
+/* ============================================================================
+   EXPLORATIONS FROM 9 OCT · each one waiting on a pick
+   ----------------------------------------------------------------------------
+   Built in answer to the 9 October review of the reference. Every block here is
+   a set of options shown side by side in the plate named in its header. The
+   picked option moves to components.css with its rationale; the rest go to
+   archive/retired.css. Nothing here is for pages.
+   ============================================================================ */
+
+
+/* ── WHAT LEAVES THE CONSOLE: THE REPORT AND THE DECK (report.html,
+   slides.html, exploration, 15 October) ──────────────────────────────────────
+   What someone pays for is the document they forward. Until now the console's
+   PDF was Times and Helvetica. Two templates, built from the system's parts:
+
+     THE REPORT   A4. A cover (the lockup, the title, who it is for, the key
+                  to the tier marks), then the numbered document from Pl. 20
+                  with its numerals in the margin, citations as the citation
+                  chips, figures from Pl. 22 and a list of sources each with
+                  its tier mark. On screen it is a stack of sheets on the panel;
+                  printed, each sheet is a page, the cover bleeds and the rest
+                  carry a running head and folio from @page.
+     THE DECK     16:9 at 1280 by 720, scaled to the window on screen and
+                  printed one slide to a page, so a PDF of it is the deck. Six
+                  layouts: title, section (the icon margin), statement,
+                  evidence, chart, close. The title and close are dark and
+                  print dark ([data-print-as-is]). */
+.rp { --rp-w: 210mm; --rp-h: 297mm; padding: var(--sp-10) var(--sp-4); background: var(--ground); min-height: 100vh }
+.rp-sheet { width: min(var(--rp-w), 100%); margin: 0 auto var(--sp-8); padding: 18mm 16mm 20mm; background: var(--bg); border: 1px solid var(--line-2) }
+.rp-cover { min-height: var(--rp-h); display: flex; flex-direction: column; padding: 16mm }
+.rp-cover .rp-logo { height: var(--sp-8); width: auto; align-self: flex-start }
+.rp-cover .rp-kind { margin-top: auto; font-family: var(--mono); font-size: var(--eb-2); letter-spacing: var(--eb-2-ls); text-transform: uppercase; color: var(--ink-55) }
+.rp-cover h1 { margin-top: var(--sp-4); font-family: var(--serif); font-weight: var(--serif-w-display); font-size: var(--t-display); line-height: var(--t-display-lh); text-wrap: balance; max-width: 16ch }
+.rp-cover .lede { margin-top: var(--sp-5); max-width: 46ch }
+.rp-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-4); margin-top: var(--sp-12); padding-top: var(--sp-4); border-top: 2px solid var(--ink) }
+.rp-meta dt { font-family: var(--mono); font-size: var(--eb-4); letter-spacing: var(--eb-4-ls); text-transform: uppercase; color: var(--ink-55) }
+.rp-meta dd { margin: var(--sp-1) 0 0; font-size: var(--t-ui); line-height: var(--t-ui-lh); color: var(--ink) }
+.rp-key { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-6); margin-top: var(--sp-8); font-size: var(--t-sm); color: var(--ink-70) }
+.rp-key span { display: inline-flex; align-items: center; gap: var(--sp-2) }
+.rp-key .t1, .rp-key .t2 { color: var(--accent-text) }
+.rp-run { display: flex; justify-content: space-between; margin-bottom: var(--sp-10); padding-bottom: var(--sp-2); border-bottom: 1px solid var(--line-2); font-family: var(--mono); font-size: var(--eb-4); letter-spacing: var(--eb-4-ls); text-transform: uppercase; color: var(--ink-55) }
+.rp-body { container-type: inline-size; --st-top: 0px }
+.rp-body .st-num { position: static }
+.rp-body .st-sec + .st-sec { margin-top: var(--sp-10) }
+.rp-body .st-body h3 { font-family: var(--serif); font-weight: var(--serif-w); font-size: var(--t-h3); line-height: var(--t-h3-lh) }
+.rp-body .st-body p { font-size: var(--t-body); line-height: 1.7; color: var(--ink-70) }
+.rp-body .st-body p + p, .rp-body .st-body h3 + p { margin-top: var(--sp-4) }
+.rp-body .st-body > .viz, .rp-body .st-body > .sheet-v, .rp-body .st-body > .rp-finding { margin-top: var(--sp-6) }
+/* A figure or a table takes the full width of the text block, margin column
+   and all, the way a printed report breaks a figure out of the measure. */
+.rp-body .st-body > .viz, .rp-body .st-body > .sheet-v { margin-left: calc((var(--sp-26) + var(--sp-8) + var(--sp-8)) * -1) }
+.rp-finding { padding: var(--sp-5) var(--sp-6); border-left: 2px solid var(--accent); background: var(--fill) }
+.rp-finding b { display: block; font-family: var(--mono); font-weight: 400; font-size: var(--eb-4); letter-spacing: var(--eb-4-ls); text-transform: uppercase; color: var(--accent-text) }
+.rp-finding p { margin-top: var(--sp-2); font-family: var(--serif); font-size: var(--t-h4); line-height: var(--t-h4-lh); color: var(--ink) }
+.rp-body .sheet-t thead th { position: static }
+.rp-refs { display: grid; gap: var(--sp-3); counter-reset: ref }
+.rp-refs li { display: grid; grid-template-columns: var(--sp-8) minmax(0, 1fr); font-size: var(--t-sm); line-height: var(--t-sm-lh); color: var(--ink-70) }
+.rp-refs .n { font-family: var(--mono); color: var(--ink) }
+.rp-refs .n i { font-style: normal; color: var(--accent-text) }
+.rp-refs .t3 .n i { color: var(--ink-55) }
+.rp-refs em { color: var(--ink) }
+@media print {
+  @page cover { margin: 0 }
+  .rp { padding: 0; background: none; min-height: 0 }
+  .rp-sheet { width: auto; margin: 0; padding: 0; border: 0; background: none; break-after: page }
+  .rp-body .sheet-v { overflow: visible; border-radius: 0 }
+  .rp-sheet:last-child { break-after: auto }
+  .rp-cover { page: cover; height: var(--rp-h); min-height: 0; padding: 16mm }
+  .rp-run { display: none }
+}
+
+/* overflow-x: clip keeps an unscaled slide from widening a phone's layout
+   viewport before the script has measured it. */
+.deck { --sl-w: 1280px; --sl-h: 720px; padding: var(--sp-8) var(--sp-4); background: var(--ground); display: grid; justify-items: center; gap: var(--sp-6); overflow-x: clip }
+.slide { width: var(--sl-w); height: var(--sl-h); zoom: var(--sl-k, 1); position: relative; overflow: hidden; display: flex; flex-direction: column; padding: var(--sp-16) var(--sp-18); background: var(--bg); border: 1px solid var(--line-2); scroll-snap-align: center }
+.slide .sl-foot { position: absolute; left: var(--sp-18); right: var(--sp-18); bottom: var(--sp-8); display: flex; justify-content: space-between; font-family: var(--mono); font-size: var(--eb-3); letter-spacing: var(--eb-3-ls); text-transform: uppercase; color: var(--ink-55) }
+.slide .sl-kick { font-family: var(--mono); font-size: var(--eb-1); letter-spacing: var(--eb-1-ls); text-transform: uppercase; color: var(--ink-55) }
+.slide h2 { margin-top: var(--sp-5); font-family: var(--serif); font-weight: var(--serif-w-display); font-size: calc(var(--t-display) * 1.3); line-height: 1.12; text-wrap: balance; max-width: 20ch }
+.slide .sl-sub { margin-top: var(--sp-6); font-size: var(--t-h4); line-height: var(--t-h4-lh); color: var(--ink-70); max-width: 52ch }
+.sl-title { justify-content: flex-end }
+.sl-title .sl-logo { position: absolute; top: var(--sp-16); left: var(--sp-18); height: var(--sp-10); width: auto }
+.sl-title h2 { font-size: calc(var(--t-display) * 1.6); max-width: 18ch }
+.sl-section { flex-direction: row; align-items: center; gap: var(--sp-16) }
+.sl-section .px-icon { width: calc(var(--icon-px) * 2); height: calc(var(--icon-px) * 2) }
+.sl-section h2 { margin-top: var(--sp-2) }
+.sl-statement { justify-content: center }
+.sl-statement blockquote { margin: 0; font-family: var(--serif); font-weight: var(--serif-w-display); font-size: calc(var(--t-display) * 1.15); line-height: 1.25; color: var(--ink); max-width: 26ch; text-wrap: balance }
+.sl-statement .sl-src { margin-top: var(--sp-8); font-size: var(--t-ui); color: var(--ink-55) }
+.sl-evidence .rule-row { margin-top: auto; margin-bottom: var(--sp-10) }
+.sl-evidence .rule-row h3 { font-family: var(--serif); font-weight: var(--serif-w); font-size: var(--t-h3); line-height: var(--t-h3-lh) }
+.sl-evidence .rule-row p { margin-top: var(--sp-3); font-size: var(--t-body); line-height: var(--t-body-lh); color: var(--ink-70) }
+.sl-chart h2 { font-size: var(--t-h1); line-height: var(--t-h1-lh); max-width: 30ch }
+.sl-chart .viz { margin-top: auto; margin-bottom: var(--sp-8); border: 0; padding: 0 }
+.sl-close { justify-content: center }
+.sl-close .row { margin-top: var(--sp-10) }
+@media print {
+  @page deck { size: 1280px 720px; margin: 0 }
+  .deck { padding: 0; gap: 0; background: none; display: block }
+  .slide { page: deck; zoom: 1; border: 0; break-after: page }
+  .slide:last-child { break-after: auto }
+}
+
+/* ── DATA (exploration, 15 October) ─────────────────────────────────────────
+   Pl. 22 was removed the same day (Matt); its bars, texture series and map
+   are in archive/retired.css. What is left is what report.html and
+   slides.html use: the chart frame and the forest plot. The language below
+   is kept, because it still governs any chart drawn from these parts.
+
+   Development banks and evaluators think in effect sizes, intervals, rankings
+   and maps, and the system had no way to draw any of them. The language,
+   from the brand's own parts:
+
+     ONE ACCENT PER CHART   the finding: the pooled estimate, the bar the
+                            sentence above is about, the country in focus.
+                            Everything else is ink.
+     SERIES BY TEXTURE      not by hue: solid ink, a hatch, the dither screen,
+                            an outline. One accent and one ink cannot carry
+                            five series in colour, and texture survives a
+                            black-and-white printer and every kind of colour
+                            blindness, which a palette of hues does not.
+     A RAMP OF DENSITIES    a map's sequence is the dither screen at four
+                            pitches, so a choropleth is drawn in the same
+                            screen as the icons, the video and the elevation
+                            the brand tried.
+     THE POINT IS THE MARK  in a forest plot each study's estimate is drawn
+                            with its tier mark (● ◐), so the strength of the
+                            evidence is on the chart, not in a footnote.
+     NUMBERS IN MONO        tabular, labelled directly at the end of the
+                            mark; a legend only where a map needs one.
+     EVERY CHART SAYS WHERE a source line in the note style, and
+                            "Illustrative values" until the data is real. */
+:root {
+  --viz-focus: var(--accent);
+  --viz-axis: var(--line-2);
+  --viz-grid: var(--line);
+  --viz-fill-1: var(--ink);
+}
+.viz { container-type: inline-size; margin: 0; padding: var(--sp-6); background: var(--bg); border: 1px solid var(--line-2); border-radius: var(--r-md) }
+.viz-h { display: grid; gap: var(--sp-1); margin-bottom: var(--sp-6) }
+.viz-h b { font-family: var(--serif); font-weight: var(--serif-w); font-size: var(--t-h4); line-height: var(--t-h4-lh); color: var(--ink) }
+.viz-h span { font-size: var(--t-sm); line-height: var(--t-sm-lh); color: var(--ink-55) }
+.viz-src { margin-top: var(--sp-5); padding-top: var(--sp-3); border-top: 1px solid var(--line); font-size: var(--t-sm); line-height: var(--t-sm-lh); color: var(--ink-55) }
+.viz-flag { font-family: var(--mono); font-size: var(--eb-4); letter-spacing: var(--eb-4-ls); text-transform: uppercase; color: var(--ink-55) }
+
+/* The forest plot: a label, a track and the value, per row. The track's
+   positions are percentages of the axis, set on the row as --lo, --est, --hi;
+   --zero places the line of no effect, and the pooled row's diamond takes
+   --peak, where the estimate falls inside its own interval. */
+.forest { display: grid; grid-template-columns: minmax(0, calc(var(--sp-26) * 1.7)) minmax(0, 1fr) minmax(0, calc(var(--sp-26) + var(--sp-8))); column-gap: var(--sp-4); font-variant-numeric: tabular-nums }
+.fp-row { display: contents }
+.fp-l { align-self: center; padding: var(--sp-2) 0; font-size: var(--t-ui); color: var(--ink) }
+.fp-l small { display: block; font-family: var(--mono); font-size: var(--eb-4); letter-spacing: var(--eb-4-ls); text-transform: uppercase; color: var(--ink-55) }
+.fp-t { position: relative; min-height: calc(var(--sp-8) + var(--sp-2)); background: linear-gradient(var(--viz-axis), var(--viz-axis)) var(--zero) 0 / 1px 100% no-repeat }
+.fp-ci { position: absolute; top: 50%; left: var(--lo); width: calc(var(--hi) - var(--lo)); height: 2px; transform: translateY(-50%); background: var(--viz-fill-1) }
+.fp-pt { position: absolute; top: 50%; left: var(--est); transform: translate(-50%, -50%); font-family: var(--mono); font-style: normal; font-size: var(--t-h4); line-height: 1; color: var(--ink); background: var(--bg); border-radius: var(--r-full) }
+.fp-v { align-self: center; justify-self: end; font-family: var(--mono); font-size: var(--eb-3); color: var(--ink) }
+.fp-pool .fp-l { font-weight: 600 }
+.fp-pool .fp-t { border-top: 1px solid var(--line-2) }
+.fp-pool .fp-ci { display: none }
+.fp-pool .fp-pt { left: var(--lo); width: calc(var(--hi) - var(--lo)); height: var(--sp-4); transform: translateY(-50%); background: var(--viz-focus); border-radius: 0; clip-path: polygon(0 50%, var(--peak, 50%) 0, 100% 50%, var(--peak, 50%) 100%) }
+.fp-pool .fp-v { color: var(--accent-text); font-weight: 700 }
+.fp-axis { position: relative; height: var(--sp-6); border-top: 1px solid var(--viz-axis) }
+.fp-axis span { position: absolute; top: var(--sp-1); transform: translateX(-50%); font-family: var(--mono); font-size: var(--eb-4); color: var(--ink-55) }
+.fp-dir { display: flex; gap: var(--sp-4); justify-content: space-between; font-family: var(--mono); font-size: var(--eb-4); letter-spacing: var(--eb-4-ls); text-transform: uppercase; color: var(--ink-55) }
+/* In a narrow figure the labels and values give up room to the track. */
+@container (max-width: 560px) {
+  .forest { grid-template-columns: minmax(0, var(--sp-26)) minmax(0, 1fr) minmax(0, calc(var(--sp-26) - var(--sp-4))) }
+  .fp-l small { display: none }
+  .fp-v { font-size: var(--eb-4) }
+}
+
+/* ═══ DOCUMENTARY IMAGES (Pl. 18, 16 October) ════════════════════════════
+   Matt asked what a war zone would look like as a dark, monochrome, dithered
+   image, and whether the brand should carry documentary photographs that are
+   not only rasterised: "black and white documentary images that have a
+   rasterized screen over them that lets the colours show through". Two
+   treatments of the same photograph of Mosul's Old City (Levi Clancy, 2019,
+   CC0), both built on .vmap's ramp:
+
+     .doc-dark    a scene on a dark band, mapped by the .vmap driver with the
+                  ramp compressed so the sky never reaches the paper tone
+     .doc-screen  the photograph in the dither, its colour showing through
+                  in patches that drift with the scroll ([data-docscreen])
+
+   A documentary picture is a figure, tier three: square, framed by its own
+   edge, always captioned with the place and the date, and credited. */
+.doc-shot { aspect-ratio: 3 / 2; background: var(--bg) }
+.doc-shot img, .doc-shot canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated }
+[data-js] .doc-shot[data-docscreen] img { visibility: hidden }
+/* The figure and its caption: place, date, then the credit. Moved here from
+   reference.css on 16 Oct, when home.html became the first page to carry one. */
+/* :where() so the reset clears the browser's figure margins and nothing else:
+   a layout block (.stack's gap) still spaces it. */
+:where(.doc-fig) { margin: 0 }
+.doc-fig { min-width: 0 }
+.doc-fig figcaption { margin-top: var(--sp-3); font-size: var(--t-sm); line-height: var(--t-sm-lh); color: var(--ink-55); max-width: 64ch }
+/* On a light page (18 · A2, 18 · A3) the picture is a dark object: near-ink
+   to about half ink. On a dark band (18 · A1) it is compressed toward the band. */
+.doc-dark {
+  --v-0: color-mix(in srgb, var(--ink) 94%, var(--bg));
+  --v-1: color-mix(in srgb, var(--ink) 88%, var(--bg));
+  --v-2: color-mix(in srgb, var(--ink) 80%, var(--bg));
+  --v-3: color-mix(in srgb, var(--ink) 71%, var(--bg));
+  --v-4: color-mix(in srgb, var(--ink) 62%, var(--bg));
+  --v-5: color-mix(in srgb, var(--ink) 53%, var(--bg));
+  --v-6: color-mix(in srgb, var(--ink) 44%, var(--bg));
+}
+.on-dark .doc-dark { --v-0: var(--bg);
+  --v-1: color-mix(in srgb, var(--ink) 4%, var(--bg));
+  --v-2: color-mix(in srgb, var(--ink) 10%, var(--bg));
+  --v-3: color-mix(in srgb, var(--ink) 18%, var(--bg));
+  --v-4: color-mix(in srgb, var(--ink) 28%, var(--bg));
+  --v-5: color-mix(in srgb, var(--ink) 40%, var(--bg));
+  --v-6: color-mix(in srgb, var(--ink) 56%, var(--bg));
+}
+
+
+/* ============================================================================
+   LANDING SECTIONS · EXPLORATION, 19 October 2026 (sections.html)
+   ----------------------------------------------------------------------------
+   Matt: how does the brand express itself in the sections landing pages are
+   built from (sliders, logo fields and the rest)? Every common pattern is on
+   sections.html, light and dark, coded L01 to L26. These are the shapes that
+   did not exist; the patterns the catalog already covers are linked from the
+   index, not rebuilt. Nothing here is adopted. The rules held throughout:
+     · tokens only; a dark band is .band--dark.on-dark and every rule below
+       reads its colours from tokens, so it flips without a second rule
+     · no new motion: a slider moves by native scroll and scroll-snap, an
+       accordion is a <details> that opens without a tween, a marquee is
+       shown still (moving it would be a new primitive, proposed, not built)
+     · one loud thing per section: the tint goes on the one action
+   ============================================================================ */
+
+.lp-code { display: block; margin-bottom: var(--sp-6) }
+.lp-media { background: var(--fill); border: 1px solid var(--line); border-radius: var(--r-lg); display: grid; place-items: center; overflow: hidden; aspect-ratio: 4 / 3 }
+.lp-media img { width: 62%; height: auto; display: block }
+.on-dark .lp-media img { filter: invert(1); mix-blend-mode: screen }
+.lp-media--wide { aspect-ratio: 16 / 9 }
+
+/* L02 · LOGO FIELD: dummy marks in a ruled grid, ink at rest. */
+.lp-logos { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 1px solid var(--line-2) }
+.lp-logos > * { display: flex; align-items: center; justify-content: center; gap: var(--sp-2); padding: var(--sp-8) var(--sp-4); border-left: 1px solid var(--line); color: var(--ink-55); font-family: var(--mono); font-size: var(--eb-2); letter-spacing: var(--eb-2-ls); text-transform: uppercase }
+.lp-logos > *:first-child { border-left: 0 }
+.lp-logo svg { width: var(--sp-6); height: var(--sp-6); fill: currentColor; flex: none }
+/* L03 · THE MARQUEE, shown still: one row that bleeds off both edges. */
+.lp-marquee { display: flex; gap: var(--sp-14); overflow: hidden; padding: var(--sp-6) 0; border-block: 1px solid var(--line); -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent) }
+.lp-marquee > * { flex: none; color: var(--ink-55); font-family: var(--mono); font-size: var(--eb-2); letter-spacing: var(--eb-2-ls); text-transform: uppercase; display: flex; align-items: center; gap: var(--sp-2) }
+
+/* L05 · FEATURE TABS: a tray of choices over the panel they switch. */
+.lp-tabs { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sp-12); align-items: center; margin-top: var(--sp-8) }
+.lp-tabs h3 { font-family: var(--serif); font-weight: var(--serif-w); font-size: var(--t-h3); line-height: var(--t-h3-lh) }
+.lp-tabs .prose { margin-top: var(--sp-3) }
+.lp-tabs .checks { margin-top: var(--sp-5) }
+
+/* L06 · ALTERNATING ROWS: picture and words, the picture changing sides. */
+.lp-alt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sp-12); align-items: center }
+.lp-alt + .lp-alt { margin-top: var(--sp-14) }
+.lp-alt:nth-of-type(even) > .lp-media { order: 2 }
+.lp-alt h3 { font-family: var(--serif); font-weight: var(--serif-w); font-size: var(--t-h3); line-height: var(--t-h3-lh); margin-top: var(--sp-3) }
+.lp-alt .prose { margin-top: var(--sp-3) }
+
+/* L07 · SLIDER: native horizontal scroll that snaps card to card. The two
+   buttons scroll it a card at a time; nothing tweens that scroll does not. */
+.lp-slider-h { display: flex; align-items: end; gap: var(--sp-4); margin-bottom: var(--sp-8) }
+.lp-slider-h .sec-head { margin-bottom: 0 }
+.lp-slider-h .lp-nav { margin-left: auto; display: flex; gap: var(--sp-2) }
+.lp-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - var(--sp-6) * 2) / 3); gap: var(--sp-6); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: var(--sp-1) }
+.lp-track::-webkit-scrollbar { display: none }
+.lp-track > * { scroll-snap-align: start }
+.lp-track .lp-media { aspect-ratio: 3 / 2 }
+.lp-track .card h3 { margin-top: var(--sp-5) }
+.lp-dots { display: flex; gap: var(--sp-2); margin-top: var(--sp-6) }
+.lp-dots span { width: var(--sp-6); height: 2px; background: var(--line-2) }
+.lp-dots span.on { background: var(--ink) }
+
+/* L08 · TESTIMONIALS: one quote set large in the serif, then a row. */
+.lp-quote { max-width: var(--col-text) }
+.lp-quote blockquote { font-family: var(--serif); font-weight: var(--serif-w); font-size: var(--t-h2); line-height: var(--t-h2-lh); text-wrap: balance }
+.lp-quote figcaption, .lp-quotes figcaption { display: flex; align-items: center; gap: var(--sp-3); margin-top: var(--sp-6) }
+.lp-who b { display: block; font-weight: 600; font-size: var(--t-ui) }
+.lp-who span { font-family: var(--mono); font-size: var(--eb-3); letter-spacing: var(--eb-3-ls); text-transform: uppercase; color: var(--ink-55) }
+.lp-quotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-6); margin-top: var(--sp-14) }
+.lp-quotes blockquote { font-size: var(--t-body); line-height: var(--t-body-lh); color: var(--ink-70) }
+.lp-av { width: var(--sp-10); height: var(--sp-10); border-radius: var(--r-full); background: var(--tray); display: grid; place-items: center; font-family: var(--mono); font-size: var(--eb-3); color: var(--ink-70); flex: none }
+
+/* L10 · HOW IT WORKS, across: the numbered steps laid side by side. */
+.lp-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sp-8) }
+.lp-steps .step { grid-template-columns: minmax(0, 1fr); gap: var(--sp-3) }
+
+/* L11 · BEFORE AND AFTER: two pictures on one frame, a range input moving the
+   seam. The seam is a hairline in ink with a tray-coloured handle. */
+.lp-ba { position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); background: var(--fill); --pos: 50% }
+.lp-ba > div { position: absolute; inset: 0; display: grid; place-items: center }
+.lp-ba > div img { width: 40%; height: auto }
+.lp-ba .lp-after { clip-path: inset(0 0 0 var(--pos)); background: var(--tray) }
+.lp-ba .lp-seam { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 1px; background: var(--ink); pointer-events: none }
+.lp-ba .lp-seam::after { content: ""; position: absolute; top: 50%; left: 50%; width: var(--sp-8); height: var(--sp-8); transform: translate(-50%, -50%); border-radius: var(--r-full); background: var(--face); border: 1px solid var(--ink) }
+.lp-ba input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0 }
+.lp-ba .lp-tag { position: absolute; top: var(--sp-4); }
+.lp-ba .lp-tag.l { left: var(--sp-4) } .lp-ba .lp-tag.r { right: var(--sp-4) }
+
+/* L12 · COMPARISON TABLE: rows of the ledger's rule; our column is the one
+   carrying the wash. */
+.lp-table { width: 100%; border-collapse: collapse; font-size: var(--t-ui) }
+.lp-table th, .lp-table td { padding: var(--sp-4) var(--sp-5); border-top: 1px solid var(--line); text-align: left }
+.lp-table thead th { border-top: 0; font-family: var(--mono); font-size: var(--eb-3); letter-spacing: var(--eb-3-ls); text-transform: uppercase; color: var(--ink-55); font-weight: 400 }
+.lp-table tbody tr:first-child > * { border-top-color: var(--line-2) }
+.lp-table .us { background: var(--wash-1); color: var(--ink) }
+.lp-table thead .us { color: var(--ink) }
+.lp-table td { color: var(--ink-70) }
+.lp-yes, .lp-no { font-family: var(--mono); font-size: var(--eb-2) }
+.lp-yes { color: var(--ink) } .lp-no { color: var(--ink-35) }
+
+/* L13 · PRICING: three cards on one row, the recommended one raised by the
+   violator, the period chosen in a tray. */
+.lp-price-h { display: flex; justify-content: center; margin-bottom: var(--sp-10) }
+.lp-price .card { gap: 0 }
+.lp-price .lp-amt { font-family: var(--serif); font-weight: var(--serif-w-display); font-size: var(--t-stat); line-height: 1; margin-top: var(--sp-5) }
+.lp-price .lp-per { font-family: var(--mono); font-size: var(--eb-3); letter-spacing: var(--eb-3-ls); text-transform: uppercase; color: var(--ink-55); margin-top: var(--sp-2) }
+.lp-price .checks { margin-top: var(--sp-6); flex: 1 }
+.lp-price .card-foot .btn { width: 100%; justify-content: center }
+
+/* L14 · FAQ: <details> on the ledger's rule, a pixel chevron that turns. */
+.lp-faq { max-width: var(--col-text); margin-inline: auto }
+.lp-faq details { border-top: 1px solid var(--line) }
+.lp-faq details:first-child { border-top-color: var(--line-2) }
+.lp-faq summary { display: flex; align-items: center; gap: var(--sp-4); padding: var(--sp-5) 0; cursor: pointer; list-style: none; font-family: var(--serif); font-weight: var(--serif-w); font-size: var(--t-h4); line-height: var(--t-h4-lh) }
+.lp-faq summary::-webkit-details-marker { display: none }
+.lp-faq summary::after { content: ""; margin-left: auto; flex: none; width: calc(var(--dither-cell) * 4px); height: calc(var(--dither-cell) * 5px); background: var(--ink-55); -webkit-mask: var(--px-arrow) center / contain no-repeat; mask: var(--px-arrow) center / contain no-repeat; transform: rotate(90deg) }
+.lp-faq details[open] summary::after { transform: rotate(-90deg) }
+.lp-faq details p { padding-bottom: var(--sp-6); color: var(--ink-70); max-width: var(--measure-prose) }
+
+/* L16 · EMAIL CAPTURE: the field and the one action on a line. */
+.lp-signup { display: flex; gap: var(--sp-2); max-width: var(--col-chat); margin: var(--sp-8) auto 0 }
+.lp-signup .input { flex: 1; height: auto }
+.lp-fine { text-align: center; margin-top: var(--sp-3); font-size: var(--t-sm); color: var(--ink-55) }
+
+/* L18 · PEOPLE: portrait, name, role. */
+.lp-people { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-6) }
+.lp-people .lp-media { aspect-ratio: 1 }
+.lp-people .lp-who { margin-top: var(--sp-4) }
+
+/* L19 · VIDEO: a poster with the send's pixel arrow as the play mark. */
+.lp-video { position: relative }
+.lp-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: var(--sp-18); height: var(--sp-18); border-radius: var(--r-full); background: var(--face); border: var(--edge); display: grid; place-items: center; transition: box-shadow var(--mo-base) }
+.lp-play::before { content: ""; width: calc(var(--dither-cell) * 4px * 2); height: calc(var(--dither-cell) * 5px * 2); background: var(--accent-text); -webkit-mask: var(--px-arrow) center / contain no-repeat; mask: var(--px-arrow) center / contain no-repeat; margin-left: var(--sp-1) }
+.lp-play:hover { box-shadow: var(--elev-2) }
+
+/* L20 · TIMELINE: dates in mono on a rule that runs across. */
+.lp-time { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line-2) }
+.lp-time > * { position: relative; padding: var(--sp-6) var(--sp-6) 0 0 }
+.lp-time > *::before { content: ""; position: absolute; top: calc(var(--sp-1) * -1 - 1px); left: 0; width: var(--sp-2); height: var(--sp-2); background: var(--ink) }
+.lp-time > .now::before { background: var(--accent) }
+.lp-time h3 { font-family: var(--serif); font-weight: var(--serif-w); font-size: var(--t-h4); line-height: var(--t-h4-lh); margin-top: var(--sp-2) }
+.lp-time p { font-size: var(--t-ui); line-height: var(--t-ui-lh); color: var(--ink-70); margin-top: var(--sp-2) }
+
+/* L21 · BENTO: tiles of two sizes on one grid. */
+.lp-bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(calc(var(--sp-18) * 3), auto); gap: var(--sp-5) }
+.lp-bento > .card { justify-content: flex-end }
+.lp-bento > .big { grid-column: span 2; grid-row: span 2 }
+.lp-bento > .wide { grid-column: span 2 }
+.lp-bento .px-icon { margin-bottom: auto }
+.lp-bento .card h3 { margin-top: var(--sp-5) }
+.lp-bento .lp-num { font-family: var(--serif); font-weight: var(--serif-w-display); font-size: var(--t-stat); line-height: 1 }
+
+/* L23 · ANNOUNCEMENT BAR: a strip over the nav, one line and one link. */
+.lp-bar { display: flex; justify-content: center; align-items: center; gap: var(--sp-3); padding: var(--sp-3) var(--sp-4); background: var(--ink); color: var(--bg); font-size: var(--t-sm); border-radius: var(--r-md) }
+.lp-bar .badge { background: transparent; border-color: currentColor; color: inherit }
+.lp-bar a { color: inherit; border-bottom: 1px solid currentColor }
+.on-dark .lp-bar { background: var(--face); color: var(--ink); border: var(--edge) }
+
+/* L24 · CONTACT: words on one side, the form on the other. */
+.lp-contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sp-14); align-items: start }
+.lp-contact .card { padding: var(--sp-8) }
+.lp-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4) }
+
+/* L26 · INDEX, the inventory at the top of sections.html. */
+.lp-index { width: 100%; border-collapse: collapse; font-size: var(--t-ui) }
+.lp-index th, .lp-index td { padding: var(--sp-3) var(--sp-4) var(--sp-3) 0; border-top: 1px solid var(--line); text-align: left; vertical-align: top }
+.lp-index thead th { border-top: 0; font-family: var(--mono); font-size: var(--eb-3); letter-spacing: var(--eb-3-ls); text-transform: uppercase; color: var(--ink-55); font-weight: 400 }
+.lp-index td:first-child { font-family: var(--mono); font-size: var(--eb-2); white-space: nowrap }
+.lp-index td:last-child { color: var(--ink-70) }
+.lp-index a { border-bottom: 1px solid var(--line-2) }
+
+@media (max-width: 1080px) {
+  .lp-logos { grid-template-columns: repeat(3, minmax(0, 1fr)) }
+  .lp-logos > *:nth-child(3n + 1) { border-left: 0 }
+  .lp-logos > *:nth-child(n + 4) { border-top: 1px solid var(--line) }
+  .lp-track { grid-auto-columns: calc((100% - var(--sp-6)) / 2) }
+  .lp-people, .lp-time, .lp-bento { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+}
+@media (max-width: 620px) {
+  .lp-tabs, .lp-alt, .lp-contact, .lp-steps, .lp-quotes, .lp-time { grid-template-columns: minmax(0, 1fr) }
+  .lp-alt:nth-of-type(even) > .lp-media { order: 0 }
+  .lp-logos { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .lp-logos > * { border-left: 0; border-top: 1px solid var(--line) }
+  .lp-logos > *:nth-child(even) { border-left: 1px solid var(--line) }
+  .lp-logos > *:nth-child(-n + 2) { border-top: 0 }
+  .lp-track { grid-auto-columns: 86% }
+  .lp-bento > .big, .lp-bento > .wide { grid-column: span 2 }
+  .lp-bento > .big { grid-row: span 1 }
+  .lp-signup { flex-direction: column }
+  .lp-table { font-size: var(--t-sm) }
+  .lp-table th, .lp-table td { padding: var(--sp-3) }
+  .lp-row2 { grid-template-columns: minmax(0, 1fr) }
+  .lp-index td:last-child, .lp-index th:last-child { display: none }
+}
+
+/* ── FULL WIDTH (Matt, mid-build: "the system doesn't explore full width
+   design enough"). The page column is .wrap; these break out of it to the
+   window's edges. .lp-bleed is the one mechanism; every full-width pattern
+   below is a normal block inside .wrap that bleeds, so a page keeps one
+   column and opts out per section. */
+.lp-bleed { margin-inline: calc(50% - 50vw) }
+/* FW1 · THE BLEEDING SLIDER: it starts on the column and runs off the right. */
+.lp-track--bleed { margin-right: calc(50% - 50vw); padding-right: calc(50vw - 50%); scroll-padding-left: 0; grid-auto-columns: calc((var(--col-max) - var(--sp-6) * 2) / 3) }
+/* FW2 · THE EDGE MARQUEE: the logo row across the whole window. */
+.lp-marquee.lp-bleed { padding-inline: var(--sp-8) }
+/* FW3 · THE PICTURE BAND: a full-bleed picture, words over its lower left. */
+.lp-band-pic { position: relative; min-height: calc(var(--sp-18) * 8); display: flex; align-items: flex-end; background: var(--fill); overflow: hidden }
+.lp-band-pic > img { position: absolute; right: 4%; top: 50%; transform: translateY(-50%); height: 78%; width: auto }
+.on-dark .lp-band-pic > img { filter: invert(1); mix-blend-mode: screen }
+.lp-band-pic .wrap { position: relative; width: 100%; padding-block: var(--sp-16) }
+.lp-band-pic .lockup { max-width: calc(var(--col-max) / 2 - var(--sp-16)) }
+.lp-index code { font-family: var(--mono); font-size: var(--eb-2); color: var(--ink) }
+/* FW4 · THE EDGE SPLIT: half picture, half words, the picture meeting the
+   window's edge and the words keeping to the column. */
+.lp-split { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(var(--sp-18) * 8) }
+.lp-split > .lp-split-pic { background: var(--fill); display: grid; place-items: center; overflow: hidden }
+.lp-split > .lp-split-pic img { width: 56%; height: auto }
+.on-dark .lp-split > .lp-split-pic img { filter: invert(1); mix-blend-mode: screen }
+.lp-split > .lp-split-txt { padding: var(--sp-16) max(var(--sp-8), calc(50vw - var(--col-max) / 2)) var(--sp-16) var(--sp-14); display: flex; flex-direction: column; justify-content: center }
+.lp-split--flip > .lp-split-pic { order: 2 }
+.lp-split--flip > .lp-split-txt { padding: var(--sp-16) var(--sp-14) var(--sp-16) max(var(--sp-8), calc(50vw - var(--col-max) / 2)) }
+/* FW5 · THE STATS STRIP: ruled cells that span the window. */
+.lp-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--line-2) }
+.lp-strip > * { padding: var(--sp-10) var(--sp-8); border-left: 1px solid var(--line) }
+.lp-strip > *:first-child { border-left: 0 }
+@media (max-width: 1080px) {
+  .lp-track--bleed { grid-auto-columns: calc((100vw - var(--sp-8) * 2) / 2) }
+  .lp-strip { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .lp-strip > *:nth-child(3) { border-left: 0 }
+  .lp-strip > *:nth-child(n + 3) { border-top: 1px solid var(--line) }
+}
+@media (max-width: 620px) {
+  .lp-track--bleed { grid-auto-columns: 82vw }
+  .lp-split, .lp-split--flip { grid-template-columns: minmax(0, 1fr) }
+  .lp-split > .lp-split-pic { order: 0; min-height: calc(var(--sp-18) * 4) }
+  .lp-split > .lp-split-txt, .lp-split--flip > .lp-split-txt { padding: var(--sp-10) var(--sp-4) }
+  .lp-band-pic > img { right: -20%; opacity: .25 }
+  .lp-strip > * { padding: var(--sp-6) var(--sp-4) }
+}
+/* The index sits under the page title. */
+.lockup + .lp-index { margin-top: var(--sp-12) }
+/* The full-width bands carry their own padding. */
+.band.lp-split, .band.lp-band-pic { padding: 0 }
+/* A bleed must not widen the page by the scrollbar's width. */
+.band:has(.lp-bleed, .lp-track--bleed), .lp-band-pic, .lp-split { overflow-x: clip }
