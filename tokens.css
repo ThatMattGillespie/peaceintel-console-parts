@@ -136,6 +136,11 @@
      accent on it has to move the opposite way to everything else. */
   --accent-on-ink: var(--pi-orange-warm);
   --hl: color-mix(in srgb, var(--accent) 14%, transparent);
+  /* The search highlight (Rev 61): the words a search in this chat found,
+     marked in the thread. Neutral, because --hl already means "the passage a
+     citation points to". 12% of ink: --wash-2 (6%) was tried and could not be
+     found at a glance once the underline was dropped. */
+  --hl-find: color-mix(in srgb, var(--ink) 12%, transparent);
 
   --kicker: var(--ink-55);
   --link-h: var(--ink);
@@ -378,6 +383,7 @@
      paper-weight. Restating them makes each compose from this context. The
      rule underneath: a dark band is the dark ramp, scoped to a band. */
   --hl: color-mix(in srgb, var(--accent) 14%, transparent);
+  --hl-find: color-mix(in srgb, var(--ink) 12%, transparent);
   --link-h: var(--ink);
   --warm: var(--ground);   /* a callout on a dark band lifts toward the light */
   --tray: rgba(var(--sh), .34);

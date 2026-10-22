@@ -3,7 +3,7 @@
 **For:** Nathanael Miksis and his coding agent
 **From:** Matt Gillespie, 21 October 2026 (handoff Rev 60)
 
-Three fixes to production's console. Production's clarifying-question card and research
+Four fixes to production's console. Production's clarifying-question card and research
 updates overuse the accent, round their corners past 4px and set every line in the serif.
 Both are now restyled on the brand system. Production's input field also does not match the
 handoff when it is active.
@@ -47,6 +47,12 @@ If this README and the CSS disagree, the CSS wins.
      `--elev-3`. The textarea inside draws nothing of its own.
    - Every other field: on focus, edge `--ink-35` and `--elev-1`, no outline.
    - No field takes an accent ring or an accent edge.
+
+4. **A match found by search in a chat (H1.22, Rev 61).** No box round the message. Every place
+   the words occur in it takes a grey wash, `--hl-find` (ink at 12%, a new token), through the
+   CSS Custom Highlight API (`::highlight(find)`), and the first is scrolled to the middle of the
+   screen. Not the orange `--hl`: that marks the passage a citation points to. Click a search
+   result from This chat in `console.html` to see it; `markFind` in `prototypes.js` is the mock.
 
 Also fixed at the base, for anyone who copied it: `.reflect` and `.cb-file` wrote
 `border: 1px solid var(--edge)`. `--edge` is already a whole border, so that line is invalid

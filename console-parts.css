@@ -1,4 +1,4 @@
-/* Peace Intel console parts, Rev 60 (21 Oct 2026): the CSS for H1.19 and H1.20.
+/* Peace Intel console parts, Rev 60 and 61 (21 and 22 Oct 2026): the CSS for H1.19, H1.20 and H1.22.
 
    An extract of components.css, for pasting over the hand-built versions at
    the end of production's console.css. components.css is the source: if the
@@ -71,3 +71,15 @@
 .ru-list li:first-child { border-top: 0 }
 .ru-list .eyebrow { display: block; color: var(--ink-55) }
 .ru-list p { margin-top: var(--sp-1); font-size: var(--t-sm); line-height: var(--t-sm-lh); color: var(--ink-70) }
+
+/* H1.22 (Rev 61): a match found by search in a chat. Needs one new token,
+   declared in tokens.css beside --hl (and again in the .on-dark block):
+     --hl-find: color-mix(in srgb, var(--ink) 12%, transparent);
+   Replaces .msg.is-hit, which is gone. Behaviour: CONSOLE.md section 4. */
+/* 21 · E A MATCH IN THIS CHAT (C2 · D, Rev 61): the finder scrolls to the
+   message and marks the words it matched, every occurrence, in --hl-find, a
+   neutral wash (--hl, the accent highlighter, already means the passage a
+   citation points to). The mark stays until the next search. It replaced an
+   outline round the message, which rendered with 12px corners: an outline's
+   corners grow by its offset. Drawn through the CSS Custom Highlight API,
+   so the answer's markup is untouched; mark.find-hl is the same mark for a

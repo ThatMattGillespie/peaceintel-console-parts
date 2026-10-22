@@ -1306,13 +1306,33 @@
     var inp = dlgIn.querySelector('.find-q'); inp.setAttribute('aria-activedescendant', 'fo-' + D.i);
     var on = l.querySelector('[aria-selected="true"]'); if (on) on.scrollIntoView({ block: 'nearest' });
   }
+  /* C2 · D (Rev 61): a match in this chat is marked by its words, not by a
+     box round the message. Every occurrence in the message joins one
+     highlight, 'find', which the CSS paints in --hl-find; the first is
+     scrolled to the middle of the thread. A browser without the highlight
+     API gets the same mark as mark.find-hl. Production should also match
+     across inline formatting, which this mock does not. */
+  function markFind(el, q) {
+    var api = window.CSS && CSS.highlights && window.Highlight;
+    if (api) CSS.highlights.delete('find');
+    [].forEach.call(main.querySelectorAll('mark.find-hl'), function (m) { var p = m.parentNode; p.replaceChild(document.createTextNode(m.textContent), m); p.normalize(); });
+    if (!el) return;
+    var box = el.querySelector('.body, .bubble') || el, ql = q.toLowerCase(), ranges = [], w = document.createTreeWalker(box, NodeFilter.SHOW_TEXT), n;
+    while (ql && (n = w.nextNode())) {
+      var t = n.nodeValue.toLowerCase(), i = 0;
+      while ((i = t.indexOf(ql, i)) > -1) { var r = document.createRange(); r.setStart(n, i); r.setEnd(n, i + ql.length); ranges.push(r); i += ql.length; }
+    }
+    if (!ranges.length) { el.scrollIntoView({ block: 'start' }); return; }
+    var first = ranges[0].startContainer.parentElement;
+    if (api) { var h = new Highlight(); ranges.forEach(function (r) { h.add(r); }); CSS.highlights.set('find', h); }
+    else ranges.slice().reverse().forEach(function (r) { var m = document.createElement('mark'); m.className = 'find-hl'; r.surroundContents(m); });
+    first.scrollIntoView({ block: 'center' });
+  }
   function findGo(k, id) {
     var q = D.q.trim();
     dlg.close();
     if (k === 'msg') {
-      var el = main.querySelectorAll('.chat .msg')[+id];
-      [].forEach.call(main.querySelectorAll('.msg.is-hit'), function (x) { x.classList.remove('is-hit'); });
-      if (el) { el.classList.add('is-hit'); el.scrollIntoView({ block: 'start' }); }
+      markFind(main.querySelectorAll('.chat .msg')[+id], q);
     }
     else if (k === 'chat') go('chat', id);
     else if (k === 'project') go('project', id);

@@ -191,7 +191,7 @@ chat shows a quoted line around the words. Arrow keys move, Enter opens, Escape 
 not in it: the library has its own search.
 
 **Search from a chat's toolbar** opens the finder on **This chat** first: matches in this
-conversation, message by message. Choosing one scrolls to the message and outlines it. The tray
+conversation, message by message. Choosing one scrolls the thread to the message and highlights every place the words occur in it, the first in the middle of the screen, in a neutral grey wash (`--hl-find`, `::highlight(find)`; Rev 61). Grey, because the orange highlighter (`--hl`) means the passage a citation points to. No box round the message. The highlight stays until the next search. Match across inline formatting (bold, links, citations). The tray
 widens the search to everything.
 
 **Share.** A chat outside a project: a line saying how to work on it together (start it in a
@@ -305,6 +305,7 @@ Map them, do not rename production's.
 | H1.18 | "37 sections" stat and collapse triangles | **The prototype's version** |
 | H1.19 | Clarifying questions, "Question 1 of 2" (orange edge, bar and Next; all serif) | **Keep, restyled** (21 Oct): `.clarify` (section 2, `console-parts.html`) |
 | H1.20 | "3 research updates", each in a warm box with an orange rule | **Keep, restyled** (21 Oct): `.ru`, written in ink, folded (section 2) |
+| H1.22 | A match found by search in this chat: an outline round the message (in the prototype; production marked nothing) | **The matched words, highlighted** (22 Oct): `--hl-find`, section 4 |
 | H1.21 | The input field's active state | **Does not match the handoff** (21 Oct). Build it from the CSS (section 2) |
 
 ---

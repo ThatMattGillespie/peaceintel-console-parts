@@ -1809,8 +1809,16 @@ html:not([data-js]) .scrolly-fig:first-child { opacity: 1 }
   .app.is-top-off .app-top { margin-top: calc(var(--topbar-h) * -1) }
 }
 
-/* 21 · E A MATCH IN THIS CHAT: the finder scrolls to the message and marks it. */
-.msg.is-hit { outline: 1px solid var(--line-2); outline-offset: var(--sp-2); border-radius: var(--r-sm) }
+/* 21 · E A MATCH IN THIS CHAT (C2 · D, Rev 61): the finder scrolls to the
+   message and marks the words it matched, every occurrence, in --hl-find, a
+   neutral wash (--hl, the accent highlighter, already means the passage a
+   citation points to). The mark stays until the next search. It replaced an
+   outline round the message, which rendered with 12px corners: an outline's
+   corners grow by its offset. Drawn through the CSS Custom Highlight API,
+   so the answer's markup is untouched; mark.find-hl is the same mark for a
+   browser without the API. */
+::highlight(find) { background-color: var(--hl-find); color: var(--ink) }
+mark.find-hl { background: var(--hl-find); color: var(--ink); border-radius: var(--r-xs) }
 
 /* 21 · F GENERAL ACCESS in the share panel. Public is marked in ink. */
 .pop-access { display: flex; gap: var(--sp-3); align-items: flex-start; margin-top: var(--sp-2) }
