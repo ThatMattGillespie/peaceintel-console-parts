@@ -8,13 +8,16 @@ updates overuse the accent, round their corners past 4px and set every line in t
 Both are now restyled on the brand system. Production's input field also does not match the
 handoff when it is active.
 
+**The CSS to swap in:** `console-parts.css`. It holds just the Rev 60 blocks (H1.19 and H1.20), extracted from `components.css`, ready to replace the hand-built versions at the end of production's `console.css`. The package zip and folder you had were Rev 58, which is why `components.css` there had none of this.
+
 **Start here:** `console-parts.html` (the page this site opens to). Every state is drawn on it,
 and each specimen's markup is the markup to build. Read the page's source.
 
 | File | What it is |
 |---|---|
 | `console-parts.html` | The three parts, every state, plus a live demo |
-| `components.css` | The CSS. Search for `H1.19` (`.clarify`, `.cq-*`) and `H1.20` (`.ru`) |
+| `console-parts.css` | Only the Rev 60 CSS, to paste into production. An extract: `components.css` wins if they differ |
+| `components.css` | The whole catalog, Rev 60. Search for `H1.19` (`.clarify`, `.cq-*`) and `H1.20` (`.ru`) |
 | `CONSOLE.md` | The console's behaviour. Section 2 covers all three; section 8 lists them as H1.19 to H1.21 |
 | `AGENTS.md` | The rules. The quick reference has a row for each part |
 | `console.html` + `prototypes.js` | The console prototype. Click into the composer to see the right active state. `prototypes.js` is a mock to read, not to port |

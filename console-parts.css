@@ -1,0 +1,73 @@
+/* Peace Intel console parts, Rev 60 (21 Oct 2026): the CSS for H1.19 and H1.20.
+
+   An extract of components.css, for pasting over the hand-built versions at
+   the end of production's console.css. components.css is the source: if the
+   two ever disagree, components.css wins and this file is stale.
+
+   It needs the system's tokens (tokens.css) and these existing blocks from
+   components.css: .eyebrow, .btn.tint, .btn.ghost, .btn.sm, .act, .act.sm,
+   .input, .glyph, .msg.user.
+
+   ALSO CHANGE, in components.css or wherever production copied them:
+   .reflect and .cb-file wrote  border: 1px solid var(--edge);  but --edge is
+   already a whole border (1px solid ...), so that line was invalid and drew
+   nothing. Both now read  border: var(--edge);  */
+
+/* H1.19: the clarifying questions, production's "Question 1 of 2" card on
+   the system (Rev 60, 21 Oct). Production drew it with an orange edge, an
+   orange progress bar, a solid orange Next and every line in the serif; here
+   it is built as the reflection is. A raised object (face, edge, 4px corners).
+   One serif line, the question; the rest is sans. The count is a neutral
+   eyebrow, since it names a place and not a state; where you are is the 2px
+   ink line (Pl. 04), the steps still to come are hairlines. The options are a
+   choice among options, so they sit in a tray and the chosen one rises out of
+   it as a face tile with an ink dot. The only accent is the tint that moves
+   you on. */
+.clarify { margin-top: var(--sp-6); border: var(--edge); border-radius: var(--r-lg); background: var(--face) }
+.cq-h { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-4) var(--sp-6) 0 }
+.cq-h .eyebrow { color: var(--ink-55) }
+.cq-h .act { margin-left: auto }
+.cq-steps { display: flex; align-items: flex-end; gap: var(--sp-1); height: calc(var(--sp-1) / 2); margin: var(--sp-3) var(--sp-6) 0 }
+.cq-steps i { flex: 1; height: 1px; background: var(--line-2) }
+.cq-steps i.done { height: calc(var(--sp-1) / 2); background: var(--ink) }
+.cq-b { padding: var(--sp-5) var(--sp-6) 0 }
+.cq-q { font-family: var(--serif); font-weight: var(--serif-w); font-size: var(--t-h4); line-height: var(--t-h4-lh); color: var(--ink); text-wrap: balance }
+.cq-help { margin-top: var(--sp-1); font-size: var(--t-sm); line-height: var(--t-sm-lh); color: var(--ink-55) }
+.cq-opts { display: flex; flex-direction: column; gap: calc(var(--sp-1) / 2); margin-top: var(--sp-4); padding: calc(var(--sp-1) / 2); border: 0; background: var(--tray); border-radius: var(--r-md) }
+.cq-opt { display: flex; align-items: baseline; gap: var(--sp-3); padding: var(--sp-2) var(--sp-3); border: 1px solid transparent; border-radius: var(--r-sm); font-size: var(--t-ui); line-height: var(--t-ui-lh); color: var(--ink-70); cursor: pointer; transition: color var(--mo-base) }
+.cq-opt b { font-weight: 600; color: var(--ink) }
+.cq-opt:hover { color: var(--ink) }
+.cq-opt:has(input:checked) { background: var(--face); border-color: var(--line-2); color: var(--ink) }
+.cq-opt:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px }
+.cq-opt input { appearance: none; -webkit-appearance: none; flex: none; position: relative; top: calc(var(--sp-1) / 2); width: var(--sp-3); height: var(--sp-3); margin: 0; border: 1px solid var(--ink-35); border-radius: var(--r-full); background: var(--face); outline: none }
+.cq-opt input[type="checkbox"] { border-radius: var(--r-xs) }
+.cq-opt input:checked { border-color: var(--ink); background: var(--ink); box-shadow: inset 0 0 0 calc(var(--sp-1) / 2) var(--face) }
+.cq-own { margin-top: var(--sp-2) }
+.cq-f { display: flex; justify-content: flex-end; gap: var(--sp-2); margin-top: var(--sp-5); padding: var(--sp-4) var(--sp-6); border-top: 1px solid var(--line) }
+/* Answered, the card leaves the thread: the answers go in as the reader's
+   own message (.msg.user), and skipping leaves one line, as the reflection's
+   thanks does. */
+.cq-done { display: flex; align-items: center; gap: var(--sp-2); margin-top: var(--sp-6); font-size: var(--t-ui); color: var(--ink-55) }
+.cq-done .glyph { width: var(--sp-4); height: var(--sp-4) }
+@media (max-width: 620px) { .cq-h, .cq-b, .cq-f { padding-left: var(--sp-4); padding-right: var(--sp-4) } .cq-steps { margin-left: var(--sp-4); margin-right: var(--sp-4) } }
+
+/* H1.20: the research updates, production's "3 research updates" (Rev 60).
+   Production boxed each update in warm with an orange rule and an orange
+   edge round the toggle: four accents and three warm surfaces in one answer.
+   The updates are the working state (Pl. 13), so they are written, in ink.
+   While the research runs, the newest update is the pending answer's own
+   text; the earlier ones fold above it under one faint mono line, the tools
+   line's twin. When the answer lands, every update folds into that line, at
+   the head of the answer. Open, they are rows on hairlines, like the
+   sources: a mono count, then the sentence. */
+.ru { margin-bottom: var(--sp-3) }
+.ru > summary { list-style: none; display: inline-flex; align-items: center; gap: var(--sp-2); height: var(--sp-7); font-family: var(--mono); font-size: var(--eb-4); letter-spacing: var(--eb-4-ls); text-transform: uppercase; color: var(--ink-55); cursor: pointer }
+.ru > summary::-webkit-details-marker { display: none }
+.ru > summary:hover { color: var(--ink) }
+.ru > summary > .glyph { width: var(--sp-4); height: var(--sp-4); transform: rotate(-90deg) }
+.ru[open] > summary > .glyph { transform: none }
+.ru-list { margin: 0 0 var(--sp-2); padding: 0; list-style: none }
+.ru-list li { padding: var(--sp-2) 0; border-top: 1px solid var(--line) }
+.ru-list li:first-child { border-top: 0 }
+.ru-list .eyebrow { display: block; color: var(--ink-55) }
+.ru-list p { margin-top: var(--sp-1); font-size: var(--t-sm); line-height: var(--t-sm-lh); color: var(--ink-70) }
