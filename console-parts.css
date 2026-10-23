@@ -1,4 +1,4 @@
-/* Peace Intel console parts, Rev 60 to 62 (21 to 23 Oct 2026): the CSS for H1.19, H1.20, H1.22 and the Rev 62 changes at the end.
+/* Peace Intel console parts, Rev 60 to 63 (21 to 23 Oct 2026): the CSS for H1.19, H1.20, H1.22 and the Rev 62 changes at the end.
 
    An extract of components.css, for pasting over the hand-built versions at
    the end of production's console.css. components.css is the source: if the
@@ -38,7 +38,10 @@
 .cq-opt b { font-weight: 600; color: var(--ink) }
 .cq-opt:hover { color: var(--ink) }
 .cq-opt:has(input:checked) { background: var(--face); border-color: var(--line-2); color: var(--ink) }
-.cq-opt:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px }
+/* Keyboard focus on an option (Rev 63, Matt: the orange ring was too heavy
+   on a choice): no ring; the option's own edge goes to ink, on the tray or on
+   the chosen tile. The quiet focus menus already use (a grey wash). */
+.cq-opt:has(input:focus-visible) { border-color: var(--ink) }
 .cq-opt input { appearance: none; -webkit-appearance: none; flex: none; position: relative; top: calc(var(--sp-1) / 2); width: var(--sp-3); height: var(--sp-3); margin: 0; border: 1px solid var(--ink-35); border-radius: var(--r-full); background: var(--face); outline: none }
 .cq-opt input[type="checkbox"] { border-radius: var(--r-xs) }
 .cq-opt input:checked { border-color: var(--ink); background: var(--ink); box-shadow: inset 0 0 0 calc(var(--sp-1) / 2) var(--face) }
