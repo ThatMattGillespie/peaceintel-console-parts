@@ -44,7 +44,7 @@ explanation is the bug.
 
 ## The rules
 
-**0. Never hardcode a radius. Every corner is 4px.**
+**0. Never hardcode a radius. Every corner is 4px.** One named exception: `--r-check`, 2px, the questions card's 12px checkbox, which at 4px reads as round (Rev 63).
 Decided 2026-10-15 (it was 2px for small things and 4px for the rest from 2026-09-25). Buttons,
 inputs, cards, pills, chips, badges and the focus ring all take 4px; `--r-full` is for things
 that are actually round (avatars, status dots). The six names survive, so a component keeps the
@@ -285,14 +285,14 @@ shows the same arrow at its end under the pointer. Never mix linked and static c
 | A card that is a link | `a.card.go[href]`, the pixel arrow in its corner. Pl. 09 |
 | Emphasis tone | `--warm`, through `.callout` and `.violator` only |
 | Grid texture | `.textured` (`--top`, `--band`, `--left`, `--right`, `--side`). Never on two touching sections |
-| Corners | `--r-*` only, never a literal. Every one is 4px; `--r-full` for round |
+| Corners | `--r-*` only, never a literal. Every one is 4px; `--r-full` for round; `--r-check` (2px) for a checkbox |
 | Entry motion | `.mo-deal` on the container |
 | A surface moving | `--mo-sheet`, the phone's two drawers and its top bar only (Rev 49, 53); nothing else slides |
 | Heading group | `.lockup` + `--hero` / `--section` |
 | App shell | `.app`, `.app-top`, `.app-nav`, `.app-rail`, `.app-main`, `.app-tools`, `.app-pane`, `.composer` |
 | Console parts | `.icon-btn` (`.line`, `aria-pressed`), `.glyph` (a Lucide line), `.avatar`, `.rail-body`, `kbd`, `.tools-rail`, `.pane-meta`, `.pane-tools`, `.pane-search`, `.pane-head .ph-mark`, `.lib-item` (title tracked `--t-ui-ls`), `.act .glyph` (a menu chevron) |
 | The composer's bar | `.composer-bar`: every control `--sp-8` tall; only the tray and `.send` have a face. What shapes the answer sits at the left; the microphone (outlined) and `.send`, both 32px squares, sit together at the right in `.cb-send` |
-| Questions before the research | `form.clarify` (H1.19, `console-parts.html`): `.cq-h` (a neutral `.eyebrow` count, Back as `.act.sm`), `.cq-steps` (`i.done` is the 2px ink line), `.cq-b` (`.cq-q`, the one serif line; `.cq-help`), `fieldset.cq-opts` of `label.cq-opt` (radio or checkbox; the chosen one rises as a face tile; keyboard focus is the option's edge in ink, never the accent ring), `.cq-own` for *Write my own answer*, `.cq-f` (`.btn.ghost` Skip, `.btn.tint` Next). Answered, the answers become the reader's message; skipped, `.cq-done` |
+| Questions before the research | `form.clarify` (H1.19, `console-parts.html`): `.cq-h` (a neutral `.eyebrow` count, Back as `.act.sm`), `.cq-steps` (`i.done` is the 2px ink line), `.cq-b` (`.cq-q`, the one serif line; `.cq-help`), `fieldset.cq-opts` of `label.cq-opt` (radio or checkbox; the chosen one rises as a face tile; keyboard focus is the option's edge in the middle grey, `--ink-35`, never the accent ring; a checkbox's corner is `--r-check`), `.cq-own` for *Write my own answer*, `.cq-f` (`.btn.ghost` Skip, `.btn.tint` Next). Answered, the answers become the reader's message; skipped, `.cq-done` |
 | Research updates | `details.ru` > `summary` (faint mono count + chevron) + `ol.ru-list` (each `li`: `.eyebrow.eb-4` "Update N", then `p`). While working the newest update is the pending answer's text; done, all fold above the answer. Never warm, never an accent rule (H1.20) |
 | A search match in a chat | The matched words, every occurrence, in `--hl-find` through `::highlight(find)` (`mark.find-hl` without the API); never a box round the message, never `--hl`, which is a cited passage (Rev 61) |
 | A toolbar's controls | Every `.act`, `.icon-btn` and `.btn` in `.app-tools` is `--sp-8` tall, as in the composer's bar (Rev 62) |

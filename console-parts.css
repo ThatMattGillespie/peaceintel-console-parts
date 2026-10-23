@@ -4,7 +4,7 @@
    the end of production's console.css. components.css is the source: if the
    two ever disagree, components.css wins and this file is stale.
 
-   It needs the system's tokens (tokens.css) and these existing blocks from
+   It needs the system's tokens (tokens.css, including --r-check and --hl-find, both new) and these existing blocks from
    components.css: .eyebrow, .btn.tint, .btn.ghost, .btn.sm, .act, .act.sm,
    .input, .glyph, .msg.user.
 
@@ -39,11 +39,14 @@
 .cq-opt:hover { color: var(--ink) }
 .cq-opt:has(input:checked) { background: var(--face); border-color: var(--line-2); color: var(--ink) }
 /* Keyboard focus on an option (Rev 63, Matt: the orange ring was too heavy
-   on a choice): no ring; the option's own edge goes to ink, on the tray or on
-   the chosen tile. The quiet focus menus already use (a grey wash). */
-.cq-opt:has(input:focus-visible) { border-color: var(--ink) }
+   on a choice): no ring; the option's own edge goes to the middle grey,
+   --ink-35 (3.3:1 on the tray, 3.5:1 on the tile), the edge a field takes
+   while you type in it. On the chosen tile it steps up from the hairline; on
+   an option not chosen it is the edge alone, with no tile and no dot, so it
+   cannot be read as a choice. */
+.cq-opt:has(input:focus-visible) { border-color: var(--ink-35) }
 .cq-opt input { appearance: none; -webkit-appearance: none; flex: none; position: relative; top: calc(var(--sp-1) / 2); width: var(--sp-3); height: var(--sp-3); margin: 0; border: 1px solid var(--ink-35); border-radius: var(--r-full); background: var(--face); outline: none }
-.cq-opt input[type="checkbox"] { border-radius: var(--r-xs) }
+.cq-opt input[type="checkbox"] { border-radius: var(--r-check) }
 .cq-opt input:checked { border-color: var(--ink); background: var(--ink); box-shadow: inset 0 0 0 calc(var(--sp-1) / 2) var(--face) }
 .cq-own { margin-top: var(--sp-2) }
 .cq-f { display: flex; justify-content: flex-end; gap: var(--sp-2); margin-top: var(--sp-5); padding: var(--sp-4) var(--sp-6); border-top: 1px solid var(--line) }

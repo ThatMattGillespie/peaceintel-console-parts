@@ -622,6 +622,10 @@
      value across every prototype and production file; snapping it either way
      visibly changes every button on the site. */
   --t-btn: 14px;
+  /* A checkbox's corner (Rev 63, Matt): 2px, the one corner that is not 4. At
+     12px across a 4px corner makes the box read as a circle, the radio's
+     shape, and the two must stay apart at a glance. Only .cq-opt's checkbox. */
+  --r-check: 2px;
 
   /* The hero prompt is a signature surface and reads as oversized body copy,
      between --t-h4 (19) and --t-h3 (24). */

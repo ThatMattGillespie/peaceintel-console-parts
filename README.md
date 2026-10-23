@@ -61,7 +61,9 @@ If this README and the CSS disagree, the CSS wins.
    at the end of `console-parts.css`; behaviour in CONSOLE.md section 4 (H1.23 to H1.25).
 
 6. **Rev 63 (23 Oct). No orange on a question's options.** Keyboard focus on `.cq-opt` is the
-   option's own edge in ink, not the accent ring (in `console-parts.css`, H1.19 block).
+   option's own edge in the middle grey (`--ink-35`), not the accent ring. A checkbox has 2px
+   corners through a new token, `--r-check: 2px;` (add it beside `--t-btn`). Both in the H1.19
+   block of `console-parts.css`.
 
 Also fixed at the base, for anyone who copied it: `.reflect` and `.cb-file` wrote
 `border: 1px solid var(--edge)`. `--edge` is already a whole border, so that line is invalid

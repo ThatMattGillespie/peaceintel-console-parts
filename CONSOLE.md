@@ -91,7 +91,7 @@ few questions before it starts; keep its questions and its logic, restyle the ca
 thread after Peace Intel's line saying why it is asking: a raised object (face, edge, 4px), headed
 *Question 1 of 2* in neutral mono with the 2px ink line under the steps done, the question in the
 serif (the card's only serif line), one help line, then the options in a tray. One answer is a
-radio; several, a checkbox. With the keyboard, the option in focus shows it by its own edge in ink, on the tray or on the chosen tile: no orange ring on a choice (Rev 63). Production writes an option as "Lead term — gloss": set the lead term
+radio; several, a checkbox. With the keyboard, the option in focus shows it by its own edge in the middle grey (`--ink-35`), on the tray or on the chosen tile: no orange ring on a choice. A checkbox has 2px corners (`--r-check`) so it never reads as a radio (Rev 63). Production writes an option as "Lead term — gloss": set the lead term
 in bold and drop the dash. The last option is always *Write my own answer*, which opens a field
 under the tray; drop production's second "Something else (please specify)". The foot holds *Skip
 questions* (ghost) and *Next* (the tint; *Start research* on the last question); from the second
