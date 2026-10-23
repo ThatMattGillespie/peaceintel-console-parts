@@ -1,7 +1,7 @@
 # Peace Intel console parts: clarifying questions, research updates, the field's active state
 
 **For:** Nathanael Miksis and his coding agent
-**From:** Matt Gillespie, 21 October 2026 (handoff Rev 60)
+**From:** Matt Gillespie, 23 October 2026 (handoff Rev 63)
 
 **The whole package, Rev 63:** [peaceintel-handoff-2026-10-23.zip](https://github.com/ThatMattGillespie/peaceintel-console-parts/releases/download/rev63/peaceintel-handoff-2026-10-23.zip) (93 files: the system, the rules, the brand guide, the console and this page; the Rotary page, landing, the report and the slides are not in it).
 
