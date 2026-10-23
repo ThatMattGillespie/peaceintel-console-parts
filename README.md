@@ -3,7 +3,7 @@
 **For:** Nathanael Miksis and his coding agent
 **From:** Matt Gillespie, 21 October 2026 (handoff Rev 60)
 
-Four fixes to production's console. Production's clarifying-question card and research
+Fixes to production's console. Production's clarifying-question card and research
 updates overuse the accent, round their corners past 4px and set every line in the serif.
 Both are now restyled on the brand system. Production's input field also does not match the
 handoff when it is active.
@@ -53,6 +53,12 @@ If this README and the CSS disagree, the CSS wins.
    CSS Custom Highlight API (`::highlight(find)`), and the first is scrolled to the middle of the
    screen. Not the orange `--hl`: that marks the passage a citation points to. Click a search
    result from This chat in `console.html` to see it; `markFind` in `prototypes.js` is the mock.
+
+5. **Rev 62 (23 Oct).** Every toolbar control is 32px (`--sp-8`); the spreadsheet editor
+   (*Edit table*, the reading layout kept, `.sheet-edit` for the cell being edited, rename in
+   place); the project toolbar on its column's ground; the full-window console without a
+   frame; search results with the match under the title; two labels from orange to ink. All
+   at the end of `console-parts.css`; behaviour in CONSOLE.md section 4 (H1.23 to H1.25).
 
 Also fixed at the base, for anyone who copied it: `.reflect` and `.cb-file` wrote
 `border: 1px solid var(--edge)`. `--edge` is already a whole border, so that line is invalid

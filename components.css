@@ -1015,6 +1015,10 @@ label.field > span:first-child {
   overflow: hidden; background: var(--bg);
   display: flex; flex-direction: column;
 }
+/* The console filling the window, as the product is (Rev 62): no frame. The
+   border and corners above are for the console shown as a figure inside a
+   page (Pl. 14, landing.html); production had to find this in console.html. */
+body > .app { border: 0; border-radius: 0; box-shadow: none }
 .app-top {
   height: var(--topbar-h); flex: none; display: flex; align-items: center;
   gap: var(--sp-4); padding: 0 var(--sp-4);
@@ -1102,6 +1106,14 @@ label.field > span:first-child {
   background: linear-gradient(to bottom, var(--bg), transparent);
 }
 .app-scroll:has(> .app-tools) { padding-top: 0 }
+/* On a set-back column, a project's page (Rev 62, Nathanael's fix taken into
+   the base): the pinned toolbar and its fade take the column's ground, not
+   the page's, or a white strip sits on the grey. On a phone the toolbar is
+   its own off-white strip already. */
+@media (min-width: 621px) {
+  .surface--ground-2 .app-scroll > .app-tools { background: var(--ground-2) }
+  .surface--ground-2 .app-scroll > .app-tools::after { background: linear-gradient(to bottom, var(--ground-2), transparent) }
+}
 .app-scroll > .app-tools + * { margin-top: var(--sp-6) }
 .app-scroll > .composer-wrap {
   position: sticky; bottom: 0; z-index: 2; margin: 0 calc(var(--scroll-x) * -1);
@@ -1269,6 +1281,13 @@ kbd {
    before the spacer (a breadcrumb, the button that brings a folded rail back)
    sits at the left. */
 .app-tools { flex: none; display: flex; justify-content: flex-end; align-items: center; gap: var(--sp-2); padding: var(--sp-4) var(--sp-8) 0 }
+/* ONE HEIGHT IN THE TOOLBAR (Rev 62): every control in it is --sp-8 tall, as
+   in the composer's bar. Measured before: the outlined icons 32, the mono
+   actions 36, a small button 39, so a row of them stepped (Matt, from dev's
+   spreadsheet toolbar, where Cancel and Save sat taller than Download). */
+.app-tools :is(.act, .icon-btn, .btn) { height: var(--sp-8); padding-top: 0; padding-bottom: 0 }
+.app-tools .icon-btn { width: var(--sp-8) }
+.app-tools .btn { display: inline-flex; align-items: center }
 .app-tools .spacer { margin-left: auto }
 
 /* The library pane: a line saying what is shown, the search and its sort,
@@ -1895,7 +1914,7 @@ mark.find-hl { background: var(--hl-find); color: var(--ink); border-radius: var
 .src-as { list-style: none; counter-reset: as; display: flex; flex-direction: column }
 .src-as li { counter-increment: as; display: grid; grid-template-columns: var(--sp-5) minmax(0, 1fr); gap: var(--sp-2); padding: var(--sp-3) 0; border-top: 1px solid var(--line); font-size: var(--t-ui); line-height: 1.5; color: var(--ink) }
 .src-as li:first-child { border-top: 0; padding-top: 0 }
-.src-as li::before { content: counter(as); font-family: var(--mono); font-size: var(--eb-3); color: var(--accent-text); padding-top: 2px }
+.src-as li::before { content: counter(as); font-family: var(--mono); font-size: var(--eb-3); color: var(--ink-55); padding-top: 2px }
 .src-tags { display: flex; flex-wrap: wrap; gap: var(--sp-2) }
 .src-sum { font-family: var(--serif); font-size: var(--t-body); line-height: var(--t-body-lh); color: var(--ink) }
 
@@ -2471,10 +2490,13 @@ button.cite { cursor: pointer }
 }
 .find-row:hover, .find-row[aria-selected="true"] { background: var(--wash-1) }
 .find-row .glyph { width: var(--sp-4); height: var(--sp-4); color: var(--ink-55) }
-.find-t { display: flex; align-items: baseline; gap: var(--sp-2); min-width: 0; white-space: nowrap; overflow: hidden }
-.find-t > span:first-child { flex: none; max-width: 100%; overflow: hidden; text-overflow: ellipsis }
+/* A result's matching line sits under its title, up to two lines, the words
+   marked (Rev 62, Nathanael's layout, adopted: one line after the title hid
+   the match more often than it showed it). */
+.find-t { display: flex; flex-direction: column; gap: calc(var(--sp-1) / 2); min-width: 0 }
+.find-t > span:first-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
 .find-t b { font-weight: 700 }
-.find-sn { min-width: 0; overflow: hidden; text-overflow: ellipsis; font-size: var(--t-sm); color: var(--ink-55) }
+.find-sn { min-width: 0; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; font-size: var(--t-sm); line-height: var(--t-sm-lh); color: var(--ink-55) }
 .find-sn b { font-weight: 600; color: var(--ink) }
 .find-l .pj-empty { padding: var(--sp-4) var(--sp-3) 0 }
 .find-keys { gap: var(--sp-2) var(--sp-5); padding-top: var(--sp-3); padding-bottom: var(--sp-3) }
@@ -2551,6 +2573,19 @@ button.cite { cursor: pointer }
 .sheet-t tbody th { font-weight: 600; color: var(--ink) }
 .sheet-t td { color: var(--ink-70) }
 .sheet-t tr:last-child > * { border-bottom: 0 }
+/* EDITING A SPREADSHEET (Rev 62; production built the editor, the prototype
+   never drew one). "Edit table", an .act beside Rename's pencil, starts it;
+   the toolbar then holds Cancel (.btn.ghost.sm) and Save (.btn.tint.sm). The
+   table keeps its reading layout: the same heads, the same wrapping rows. The
+   cell being edited becomes a field in place, the size of its text, with a
+   field's focus: an ink edge and a lift, never the accent. It grows with its
+   text where field-sizing is supported; otherwise give it rows. */
+.sheet-t .sheet-edit {
+  display: block; width: calc(100% + var(--sp-2)); margin: calc(var(--sp-1) * -1); padding: var(--sp-1);
+  font: inherit; color: var(--ink); background: var(--bg);
+  border: 1px solid var(--ink-35); border-radius: var(--r-sm); box-shadow: var(--elev-1);
+  resize: none; outline: none; field-sizing: content;
+}
 
 .pdf-v { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: var(--sp-6); padding: var(--sp-8); background: var(--ground); border: 1px solid var(--line); border-radius: var(--r-md) }
 .pdf-page { aspect-ratio: 1 / 1.414; overflow: hidden; padding: var(--sp-6) var(--sp-5); background: var(--bg); border: 1px solid var(--line-2) }
@@ -2796,7 +2831,7 @@ button.cite { cursor: pointer }
    scales and uses as quiet chips, the send as the tint. */
 .reflect { margin-top: var(--sp-6); border: var(--edge); border-radius: var(--r-lg); background: var(--face) }
 .rf-h { padding: var(--sp-5) var(--sp-6) var(--sp-4); border-bottom: 1px solid var(--line) }
-.rf-h .eyebrow { color: var(--accent-text) }
+.rf-h .eyebrow { color: var(--ink-55) }
 .rf-h h3 { margin-top: var(--sp-1); font-family: var(--serif); font-weight: var(--serif-w); font-size: var(--t-h4); line-height: var(--t-h4-lh) }
 .rf-q { padding: var(--sp-4) var(--sp-6) 0 }
 .rf-q > p, .rf-q > label { display: block; margin-bottom: var(--sp-3); font-size: var(--t-ui); color: var(--ink) }

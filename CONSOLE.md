@@ -186,8 +186,8 @@ send's edge sit on the field's own edges: the composer's padding is `--sp-2` on 
 **The finder** (Exploration). The rail's search icon or Cmd K (Ctrl K) opens one field over every
 chat, project and artifact you have made, with a tray to narrow it (All, Chats, Projects,
 Artifacts). Before anything is typed it shows recent chats and two actions (New chat, New
-project); typed, it groups results and offers "Ask Peace Intel … in a new chat". A match inside a
-chat shows a quoted line around the words. Arrow keys move, Enter opens, Escape closes. Papers are
+project); typed, it groups results and offers "Ask Peace Intel … in a new chat". A result that matched inside a
+chat shows the matching line under its title, up to two lines, the words in bold (Rev 62, Nathanael's layout). Arrow keys move, Enter opens, Escape closes. Papers are
 not in it: the library has its own search.
 
 **Search from a chat's toolbar** opens the finder on **This chat** first: matches in this
@@ -198,12 +198,27 @@ widens the search to everything.
 shared project), General access, and Copy link. A project: invite by email with a role (Can edit,
 Can view), the people with access with their roles (and Remove), General access, Copy link.
 **General access** is one select: *Only people with access* (projects only), *Your
-organisation*, or *Anyone with the link*. Anyone means **public**: view only, no sign-in, no
+organisation*, or *Anyone with the link*. *Your organisation* means a signed-in person with a
+confirmed email at the owner's domain, and its label names the domain (*Anyone at
+effectivepeace.org*); it is not offered to an owner on free email, and a short list of large
+shared domains (the UN family, governments) is excluded (production, 23 Oct). Anyone means **public**: view only, no sign-in, no
 editing or replying, and the panel says so in ink with a globe.
 
 **Export.** Save the chat as an artifact (into its project, or a chosen project if it has none),
 or download the chat. An artifact downloads by kind: a document as PDF, Word or Markdown; a
-spreadsheet as Excel or CSV; a PDF as PDF.
+spreadsheet as Excel or CSV; a PDF as PDF. A project's page has no Export: Export saves or
+downloads a chat, so it is on every chat's toolbar, inside a project or not.
+
+**An artifact's toolbar** (Rev 62). The pencil (Rename) renames in place: the title stays at its
+size and in its face, its edge darkens and it lifts (`.pj-rename`); a title that runs to two lines
+wraps while it is edited. Then Download and Share. Every control in a toolbar is `--sp-8` tall.
+
+**Editing a spreadsheet** (Rev 62; production built it, the prototype does not draw it). *Edit
+table*, an `.act` beside the pencil, starts it; the toolbar then holds *Cancel* (`.btn.ghost.sm`)
+and *Save* (`.btn.tint.sm`). The table keeps its reading layout (the same mono heads, the same
+wrapping rows); the cell being edited becomes a field in place, the size of its text, with a
+field's focus: an ink edge and a lift (`.sheet-t .sheet-edit`). *Add a row* is an `.act` under
+the table. Every state is drawn as a mock on the review page Matt sent with Rev 62.
 
 ---
 
@@ -306,6 +321,9 @@ Map them, do not rename production's.
 | H1.19 | Clarifying questions, "Question 1 of 2" (orange edge, bar and Next; all serif) | **Keep, restyled** (21 Oct): `.clarify` (section 2, `console-parts.html`) |
 | H1.20 | "3 research updates", each in a warm box with an orange rule | **Keep, restyled** (21 Oct): `.ru`, written in ink, folded (section 2) |
 | H1.22 | A match found by search in this chat: an outline round the message (in the prototype; production marked nothing) | **The matched words, highlighted** (22 Oct): `--hl-find`, section 4 |
+| H1.23 | Rename on an artifact: the title replaced by a small text box | **In place, same face and size** (23 Oct), section 4 |
+| H1.24 | Spreadsheet editing: an unlabelled grid icon, cells cut to one line, a different head, a faint grey cell | **"Edit table", the reading layout kept, the cell a field in place** (23 Oct): `.sheet-edit`, section 4 |
+| H1.25 | Toolbar controls of three heights (32, 36, 39) | **One height, `--sp-8`** (23 Oct), in `components.css` |
 | H1.21 | The input field's active state | **Does not match the handoff** (21 Oct). Build it from the CSS (section 2) |
 
 ---
