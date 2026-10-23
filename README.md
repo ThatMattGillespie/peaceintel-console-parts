@@ -3,6 +3,8 @@
 **For:** Nathanael Miksis and his coding agent
 **From:** Matt Gillespie, 21 October 2026 (handoff Rev 60)
 
+**The whole package, Rev 63:** [peaceintel-handoff-2026-10-23.zip](https://github.com/ThatMattGillespie/peaceintel-console-parts/releases/download/rev63/peaceintel-handoff-2026-10-23.zip) (93 files: the system, the rules, the brand guide, the console and this page; the Rotary page, landing, the report and the slides are not in it).
+
 Fixes to production's console. Production's clarifying-question card and research
 updates overuse the accent, round their corners past 4px and set every line in the serif.
 Both are now restyled on the brand system. Production's input field also does not match the
