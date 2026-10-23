@@ -218,7 +218,7 @@ table*, an `.act` beside the pencil, starts it; the toolbar then holds *Cancel* 
 and *Save* (`.btn.tint.sm`). The table keeps its reading layout (the same mono heads, the same
 wrapping rows); the cell being edited becomes a field in place, the size of its text, with a
 field's focus: an ink edge and a lift (`.sheet-t .sheet-edit`). *Add a row* is an `.act` under
-the table. Every state is drawn as a mock on the review page Matt sent with Rev 62.
+the table. Every state is drawn on `console-parts.html` (H1.23 to H1.25).
 
 ---
 

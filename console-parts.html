@@ -26,8 +26,8 @@
 
 <section class="ref" id="top">
   <div class="wrap">
-    <div class="plate"><span class="pl-n">H1.19 · H1.20</span><span>Console parts</span><span class="pl-r">Stable · Rev 60 · 21 Oct 2026</span></div>
-    <div class="ref-t">Two console parts, on the system.</div>
+    <div class="plate"><span class="pl-n">H1.19 to H1.25</span><span>Console parts</span><span class="pl-r">Stable · Rev 62 · 23 Oct 2026</span></div>
+    <div class="ref-t">Console parts, on the system.</div>
     <p class="ref-d">
       For Nathanael and his coding agent. Production asks clarifying questions before deep research
       and streams research updates while it works; the console prototype drew neither. Both are now in
@@ -151,6 +151,27 @@
           <div class="body"><h4>Three validated items to start from</h4><p>The most tested measures ask about support for violence in the abstract and then about specific acts&hellip;</p></div>
         </div>
       </div></div><figcaption><b>Done, opened</b>When the answer lands, every update folds into the line at its head (closed by default; opened here). Open, the updates are rows on hairlines, like the sources: a mono count, then the sentence at <code>--t-sm</code>.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="ref" id="sheet">
+  <div class="wrap">
+    <div class="plate"><span class="pl-n">H1.23 · H1.24 · H1.25</span><span>An artifact&rsquo;s toolbar, and editing a spreadsheet</span><span class="pl-r">Stable · Rev 62 · 23 Oct 2026</span></div>
+    <div class="ref-t">Edit in the shape you read.</div>
+    <p class="ref-d">Every control in a toolbar is 32px (<code>--sp-8</code>), icons, mono actions and buttons alike. The pencil renames in place, at the title&rsquo;s size. <em>Edit table</em> starts editing; the table keeps its reading layout and the cell being edited becomes a field in place, with a field&rsquo;s focus: an ink edge and a lift. Cancel and Save are the small ghost and tint.</p>
+    <div class="ls-grid">
+      <figure class="ls-fig"><div class="ls-stage"><div class="app-tools"><button class="icon-btn line" type="button" aria-label="Rename"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg></button><button class="act" type="button">Edit table</button><button class="act" type="button" aria-haspopup="menu" aria-expanded="false">Download<svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><button class="act" type="button">Share</button></div></div>
+        <figcaption><b>Reading: the toolbar</b>Rename (the pencil), Edit table, Download, Share: one height. Never an unlabelled icon for editing.</figcaption></figure>
+      <figure class="ls-fig"><div class="ls-stage"><div class="app-tools"><button class="btn ghost sm" type="button">Cancel</button><button class="btn tint sm" type="button">Save</button><button class="act" type="button" aria-haspopup="menu" aria-expanded="false">Download<svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><button class="act" type="button">Share</button></div></div>
+        <figcaption><b>Editing: the toolbar</b>Cancel and Save take the place of Rename and Edit table, at the same height.</figcaption></figure>
+      <figure class="ls-fig"><div class="ls-stage"><h2 class="dp-title"><input class="pj-rename" value="Backfire Mechanisms" aria-label="Artifact name"></h2></div>
+        <figcaption><b>Renaming</b>The title stays where it is, in its face and size (<code>.pj-rename</code>, an input with no type attribute so it keeps the heading&rsquo;s font). Enter keeps, Escape restores. A title of two lines should wrap while it is edited (a textarea with the same class).</figcaption></figure>
+      <figure class="ls-fig"><div class="ls-stage"><div class="sheet-v"><table class="sheet-t"><thead><tr><th scope="col">Case</th><th scope="col">Mechanism</th><th scope="col">What happened</th></tr></thead><tbody>
+        <tr><th scope="row">Ghana, 2008 voter registration</th><td>Spatial displacement</td><td><textarea class="sheet-edit" rows="5" aria-label="What happened">Domestic observers deployed at some registration centers; irregularities moved to nearby unmonitored centers</textarea></td></tr>
+        <tr><th scope="row">Cross-national panel data</th><td>Temporal displacement</td><td>Violence shifts into the pre-election period, before monitors arrive</td></tr>
+      </tbody></table></div><div class="row tight"><button class="act sm" type="button">+ Add a row</button></div></div>
+        <figcaption><b>Editing: a cell</b>The same heads and wrapping rows as reading. The cell being edited is <code>textarea.sheet-edit</code>, the size of its text, growing with it. Add a row sits under the table.</figcaption></figure>
     </div>
   </div>
 </section>
